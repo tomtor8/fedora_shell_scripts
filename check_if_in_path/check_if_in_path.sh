@@ -9,10 +9,17 @@ IFS=:
 # cycle through the items in PATH variable
 # items are separated by colons
 for item in $pathfolders; do
+	# {/} prints the basename of the found file path
 	result=$(fd "$name" "$item" -x echo "{/}")
 	if [[ "$result" != "" ]]; then
 		counter=$((counter + 1))
-		echo "$counter - $name is located here: $item, with the result: $result"
+		echo "$counter - $name is located here: $item, with the result:"
+		echo "-------------------------------"
+		IFS=$'\n'
+		for basename in $result; do
+			echo "$basename"
+			echo
+		done
 	fi
 done
 
