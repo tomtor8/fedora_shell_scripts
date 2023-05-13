@@ -13,13 +13,16 @@ for item in $pathfolders; do
 	result=$(fd "$name" "$item" -x echo "{/}")
 	if [[ "$result" != "" ]]; then
 		counter=$((counter + 1))
-		echo "$counter - $name is located here: $item, with the result:"
+		message="$counter - $name is located here: $item, with the result(s):"
+		# get the length of the message
+		messlen=${#message}
+		echo "$message"
 		echo "-------------------------------"
 		IFS=$'\n'
 		for basename in $result; do
 			echo "$basename"
-			echo
 		done
+		echo
 	fi
 done
 
