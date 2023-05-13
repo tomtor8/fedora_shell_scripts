@@ -9,10 +9,10 @@ IFS=:
 # cycle through the items in PATH variable
 # items are separated by colons
 for item in $pathfolders; do
-	result=$(fd "$name" "$item")
+	result=$(fd "$name" "$item" -x echo "{/}")
 	if [[ "$result" != "" ]]; then
 		counter=$((counter + 1))
-		echo "$counter - $name is located here: $result"
+		echo "$counter - $name is located here: $item, with the result: $result"
 	fi
 done
 
