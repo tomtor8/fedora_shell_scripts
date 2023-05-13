@@ -19,12 +19,14 @@ for item in $pathfolders; do
 		echo "$message"
 		# create a divider the length of the message
 		for ((i = 0; i < messlen; i++)); do
-			echo -n "-"
+			echo -n "="
 		done
 		echo
 		IFS=$'\n'
 		for basename in $result; do
-			echo "$basename"
+			echo "  $basename"
+			# if you want to offset the results by a width of a tab
+			# printf "\t%s\n" "$basename"
 		done
 		echo
 	fi
