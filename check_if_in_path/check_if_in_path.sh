@@ -17,7 +17,11 @@ for item in $pathfolders; do
 		# get the length of the message
 		messlen=${#message}
 		echo "$message"
-		echo "-------------------------------"
+		# create a divider the length of the message
+		for ((i = 0; i < messlen; i++)); do
+			echo -n "-"
+		done
+		echo
 		IFS=$'\n'
 		for basename in $result; do
 			echo "$basename"
