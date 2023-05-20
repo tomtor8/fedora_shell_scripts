@@ -18,27 +18,29 @@ IFS=:
 # items are separated by colons
 for pathitem in $pathfolders; do
 	# {/} prints the basename of the found file path
-	result=$(fd "$name" "$pathitem" -x echo "{/}")
-	if [[ "$result" != "" ]]; then
-		counter=$((counter + 1))
-		message="$counter - $name location:"
-		# get the length of the message
-		messlen=${#message}
-		echo "$message"
-		# create a divider the length of the message
-		divider "$messlen"
-		echo
-		echo "  $pathitem"
-		echo
-		echo "  File name(s):"
-		echo "  -------------"
-		IFS=$'\n'
-		for basename in $result; do
-			echo "    $basename"
-			# if you want to offset the results by a width of a tab
-			# printf "\t%s\n" "$basename"
-		done
-		echo
+	if [[ -d "$pathitem" ]]; then
+		result=$(fd "$name" "$pathitem" -x echo "{/}")
+		if [[ "$result" != "" ]]; then
+			counter=$((counter + 1))
+			message="$counter - $name location:"
+			# get the length of the message
+			messlen=${#message}
+			echo "$message"
+			# create a divider the length of the message
+			divider "$messlen"
+			echo
+			echo "  $pathitem"
+			echo
+			echo "  File name(s):"
+			echo "  -------------"
+			IFS=$'\n'
+			for basename in $result; do
+				echo "    $basename"
+				# if you want to offset the results by a width of a tab
+				# printf "\t%s\n" "$basename"
+			done
+			echo
+		fi
 	fi
 done
 
